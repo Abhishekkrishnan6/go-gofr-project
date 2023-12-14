@@ -16,6 +16,12 @@ type Car struct {
 	EntryTime    time.Time `json:"entryTime" bson:"entryTime"`
 	Status       string    `json:"status" bson:"status"`
 }
+type User struct {
+	ID       string `json:"id" bson:"_id"`
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
+}
+var userCollection *mongo.Collection
 var (
 	client *mongo.Client
 	collection *mongo.Collection
@@ -34,6 +40,7 @@ func init() {
 	}
 
 	collection = client.Database("car_garage").Collection("cars")
+	userCollection = client.Database("car_garage").Collection("users")
 }
 
 func main() {
@@ -42,11 +49,66 @@ func main() {
 	app.GET("/listCars", listCarsHandler)
 	app.POST("/updateEntry", updateEntryHandler)
 	app.POST("/deleteEntry", deleteEntryHandler)
+	app.POST("/register", registerHandler)
+	app.POST("/login", loginHandler)
 	port := 8080
 	log.Printf("Server is running on :%d\n", port)
 	app.Start()
 	
 }
+
+func registerHandler(ctx *gofr.Context) (interface{}, error) {
+	var user User
+	err := json.NewDecoder(ctx.Request().Body).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+
+	existingUser := User{}
+	err = userCollection.FindOne(context.Background(), bson.D{{"username", user.Username}}).Decode(&existingUser)
+	if err == nil {
+		return nil, err
+	}
+
+	userID, err := uuid.NewV4()
+	if err != nil {
+		return nil, err
+	}
+	user.ID = userID.String()
+
+	user.Password = "hashed_password"
+
+	_, err = userCollection.InsertOne(context.Background(), user)
+	if err != nil {
+		return nil, err
+	}
+
+	return map[string]string{"id": user.ID}, nil
+}
+
+func loginHandler(ctx *gofr.Context) (interface{}, error) {
+	var loginData map[string]string
+	err := json.NewDecoder(ctx.Request().Body).Decode(&loginData)
+	if err != nil {
+		return nil, err
+	}
+
+	username := loginData["username"]
+	password := loginData["password"]
+
+	user := User{}
+	err = userCollection.FindOne(context.Background(), bson.D{{"username", username}}).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+
+	if user.Password != password {
+		return nil, err
+	}
+
+	return map[string]string{"message": "Login successful"}, nil
+}
+
 
 func addEntryHandler(ctx *gofr.Context) (interface{}, error) {
 
