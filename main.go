@@ -51,8 +51,8 @@ func main() {
 	app := gofr.New()
 	app.POST("/addEntry", addEntryHandler)
 	app.GET("/listCars", listCarsHandler)
-	app.PUT("/updateEntry", updateEntryHandler)   
-	app.POST("/deleteEntry", deleteEntryHandler) 
+	app.POST("/updateEntry", updateEntryHandler)
+	app.POST("/deleteEntry", deleteEntryHandler)
 	app.POST("/register", registerHandler)
 	app.POST("/login", loginHandler)
 	port := 8000
