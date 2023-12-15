@@ -1,31 +1,35 @@
+
 package main
+
 import (
 	"context"
 	"encoding/json"
-	"github.com/gofrs/uuid"
+	"log"
+	
+	"time"
+
 	"gofr.dev/pkg/gofr"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
-	"time"
+	"github.com/gofrs/uuid"
 )
+
 type Car struct {
 	ID           string    `json:"id" bson:"_id"`
 	LicensePlate string    `json:"licensePlate" bson:"licensePlate"`
 	EntryTime    time.Time `json:"entryTime" bson:"entryTime"`
 	Status       string    `json:"status" bson:"status"`
 }
+
 type User struct {
 	ID       string `json:"id" bson:"_id"`
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
 }
+
 var userCollection *mongo.Collection
-var (
-	client *mongo.Client
-	collection *mongo.Collection
-)
+var collection *mongo.Collection
 
 func init() {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
@@ -47,14 +51,13 @@ func main() {
 	app := gofr.New()
 	app.POST("/addEntry", addEntryHandler)
 	app.GET("/listCars", listCarsHandler)
-	app.POST("/updateEntry", updateEntryHandler)
-	app.POST("/deleteEntry", deleteEntryHandler)
+	app.PUT("/updateEntry", updateEntryHandler)   
+	app.POST("/deleteEntry", deleteEntryHandler) 
 	app.POST("/register", registerHandler)
 	app.POST("/login", loginHandler)
-	port := 8080
+	port := 8000
 	log.Printf("Server is running on :%d\n", port)
 	app.Start()
-	
 }
 
 func registerHandler(ctx *gofr.Context) (interface{}, error) {
@@ -109,19 +112,15 @@ func loginHandler(ctx *gofr.Context) (interface{}, error) {
 	return map[string]string{"message": "Login successful"}, nil
 }
 
-
 func addEntryHandler(ctx *gofr.Context) (interface{}, error) {
-
 	id, err := uuid.NewV4()
 	if err != nil {
-		
 		return nil, err
 	}
 
 	var car Car
 	err = json.NewDecoder(ctx.Request().Body).Decode(&car)
 	if err != nil {
-		
 		return nil, err
 	}
 
@@ -131,7 +130,6 @@ func addEntryHandler(ctx *gofr.Context) (interface{}, error) {
 
 	_, err = collection.InsertOne(context.Background(), car)
 	if err != nil {
-		
 		return nil, err
 	}
 
@@ -139,18 +137,15 @@ func addEntryHandler(ctx *gofr.Context) (interface{}, error) {
 }
 
 func listCarsHandler(ctx *gofr.Context) (interface{}, error) {
-
 	var cars []Car
 	cursor, err := collection.Find(context.Background(), bson.D{})
 	if err != nil {
-		
 		return nil, err
 	}
 	defer cursor.Close(context.Background())
 
 	err = cursor.All(context.Background(), &cars)
 	if err != nil {
-		
 		return nil, err
 	}
 
@@ -158,17 +153,14 @@ func listCarsHandler(ctx *gofr.Context) (interface{}, error) {
 }
 
 func updateEntryHandler(ctx *gofr.Context) (interface{}, error) {
-
 	var updateData map[string]interface{}
 	err := json.NewDecoder(ctx.Request().Body).Decode(&updateData)
 	if err != nil {
-		
 		return nil, err
 	}
 
 	carID, ok := updateData["id"].(string)
 	if !ok {
-		
 		return nil, err
 	}
 
@@ -176,7 +168,6 @@ func updateEntryHandler(ctx *gofr.Context) (interface{}, error) {
 	update := bson.D{{"$set", updateData}}
 	_, err = collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		
 		return nil, err
 	}
 
@@ -184,25 +175,22 @@ func updateEntryHandler(ctx *gofr.Context) (interface{}, error) {
 }
 
 func deleteEntryHandler(ctx *gofr.Context) (interface{}, error) {
-
 	var deleteData map[string]interface{}
 	err := json.NewDecoder(ctx.Request().Body).Decode(&deleteData)
 	if err != nil {
-		
 		return nil, err
 	}
 
 	carID, ok := deleteData["id"].(string)
 	if !ok {
-		
 		return nil, err
 	}
 
 	filter := bson.D{{"_id", carID}}
 	_, err = collection.DeleteOne(context.Background(), filter)
 	if err != nil {
-		
 		return nil, err
 	}
+
 	return map[string]string{"message": "Car entry deleted successfully"}, nil
 }
