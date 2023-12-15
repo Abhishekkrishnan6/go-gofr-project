@@ -3,11 +3,7 @@
 +------------------+        +---------------------+        +------------+
 | - licensePlate   |        | - cars: List<Car>   |        |            |
 | - model          |        |                     |        |            |
-<<<<<<< HEAD
 | - colorc         |        | +addEntry()         |        | +add()     |
-=======
-| - color          |        | +addEntry()         |        | +add()     |
->>>>>>> fbe0cf5 (some change in addding put method and delete)
 |                  |------->| +removeEntry()      |<-------| +update()  |
 +------------------+        | +getCarList()       |        | +delete()  |
                             +---------------------+        +------------+

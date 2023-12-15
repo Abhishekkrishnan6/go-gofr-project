@@ -62,5 +62,3 @@ func TestRegisterHandler(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, response.Code)
 }
 
-// Similarly, write tests for other handler functions.
-// Ensure you cover both success and error cases for each handler.
