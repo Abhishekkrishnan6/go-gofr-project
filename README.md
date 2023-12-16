@@ -36,12 +36,12 @@ Navigate to the  directory.
 
 1. Install Gofr using go get.
 
-```bash
+bash
 go get -u gofr.dev/pkg/gofr
 
 2. Run the backend server.
 
-```bash
+bash
 go run main.go
 The backend will be accessible at http://localhost:8000.
 
