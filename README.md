@@ -27,24 +27,7 @@ The Car Service Center Application is a web-based system that allows users to ma
 - Go installed (for the backend)
 - MongoDB installed and running locally
 
-### Frontend
 
-1. Navigate to the `frontend` directory.
-
-```bash
-cd frontend
-
-2. Install dependencies.
-
-```bash
-npm install
-
-3. Run the frontend application.
-
-```bash
-npm start
-
-The frontend will be accessible at http://localhost:3000. 
 
 ### Backend
 
