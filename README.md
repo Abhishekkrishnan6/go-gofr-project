@@ -44,21 +44,21 @@ npm install
 ```bash
 npm start
 
-The frontend will be accessible at http://localhost:3000.
+The frontend will be accessible at http://localhost:3000. 
 
-4. Backend
+### Backend
 
-Navigate to the backend directory.
+Navigate to the `backend` directory.
 
 ```bash
 cd backend
 
-5. Install Gofr using go get.
+1. Install Gofr using go get.
 
 ```bash
 go get -u gofr.dev/pkg/gofr
 
-6. Run the backend server.
+2. Run the backend server.
 
 ```bash
 go run main.go
