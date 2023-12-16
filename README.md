@@ -31,10 +31,8 @@ The Car Service Center Application is a web-based system that allows users to ma
 
 ### Backend
 
-Navigate to the `backend` directory.
+Navigate to the  directory.
 
-```bash
-cd backend
 
 1. Install Gofr using go get.
 
