@@ -79,3 +79,22 @@ func TestUpdateEntryHandler_ValidData(t *testing.T) {
         t.Errorf("Expected carID 'UpdatedCarID', got %s", carID)
     }
 }
+func TestDeleteEntryHandler_ValidData(t *testing.T) {
+
+    ctx := gofr.NewContext(nil, nil, gofr.New())
+    requestBody := []byte(`{"id": "someCarID"}`)
+
+    Collection.On("DeleteEntryHandler", ctx, requestBody).Return("DeletedCarID", nil)
+
+    carID, err := Collection.DeleteEntryHandler(ctx, requestBody)
+
+    if err != nil {
+        t.Errorf("DeleteEntryHandler failed: %v", err)
+    }
+
+    Collection.AssertExpectations(t)
+
+    if carID != "DeletedCarID" {
+        t.Errorf("Expected carID 'DeletedCarID', got %s", carID)
+    }
+}
