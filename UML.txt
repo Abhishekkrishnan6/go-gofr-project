@@ -2,8 +2,8 @@
 |      Car         |        |      Garage         |        |  Database  |
 +------------------+        +---------------------+        +------------+
 | - licensePlate   |        | - cars: List<Car>   |        |            |
-| - model          |        |                     |        |            |
-| - colorc         |        | +addEntry()         |        | +add()     |
+|                  |        |                     |        |            |
+|                  |        | +addEntry()         |        | +add()     |
 |                  |------->| +removeEntry()      |<-------| +update()  |
 +------------------+        | +getCarList()       |        | +delete()  |
                             +---------------------+        +------------+
