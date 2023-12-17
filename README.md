@@ -67,7 +67,7 @@ Follow these steps to set up and run the project locally:
 ```bash
    go get -u gofr.dev/pkg/gofr
    ```
-   and or by using 
+   or by using 
    ```bash 
     go mode tidy
    ``` 
@@ -103,37 +103,55 @@ Follow these steps to set up and run the project locally:
 #List Cars
    Endpoint: GET /listCars
    Description: Retrieve the list of cars.
-   Response:[{"data":[{"id":"9f3996d9-83e5-48da-ae43-f10e44edb51f","licensePlate":"2131qwasdf","entryTime":"2023-12-15T18:23:25.882Z","status":"In Garage"},{"id":"c762ee04-4c2a-489b-b96c-f982006c5855","licensePlate":"5tyfhg","entryTime":"2023-12-15T18:48:32.418Z","status":"In Garage"}]
+   Response:{
+   
+      {"data":[{"id":"9f3996d9-83e5-48da-ae43-f10e44edb51f","licensePlate":"2131qwasdf","entryTime":"2023-12-15T18:23:25.882Z","status":"In Garage"},{"id":"c762ee04-4c2a-489b-b96c-f982006c5855","licensePlate":"5tyfhg","entryTime":"2023-12-15T18:48:32.418Z","status":"In Garage"}
+}
    <br>
+   <br>
+  
 #Add Car
    Endpoint: POST /addEntry 
    Description: Add a new car to the collection.
    Request Body: json
-   {"licensePlate": "AVHekjkgtjIjhgI1237TUYG4"}
+   {
+   
+       "licensePlate": "AVHekjkgtjIjhgI1237TUYG4"
+   }
    Response:json 
    {
     "data": {
+    
         "id": "9e5710a8-f008-4c02-9ea9-73f0edd2af82"
     }
    }<br>
+    <br>
+ 
 #Update Car Repair Status
    Endpoint: PUT /updateEntry
    Description: Set a car's status to "Under Repair."
    Request Body: json
    {
+   
     "id": "ea9d706d-59a3-4838-ba1f-caf6b398e788", "status": "COMPLETED"
     }
    Response:json
    {
-    "data": {
+   
+   ```bash
+     "data": {
         "message": "Car entry updated successfully"
     }
+ ```
    }<br>
+    <br>
+   <br>
 #Remove Car
    Endpoint: PUT /deleteEntry
    Description: Remove a car from the collection.
    Request Body: json
    {
+   
     "id": "a4d94758-56ff-4340-ab22-858182ea6d96"
     }
    Response:json
@@ -161,6 +179,7 @@ import (
 *The main package is the entry point for the executable.
 *The code imports necessary packages for working with MongoDB, handling HTTP requests . 
 type Car struct {
+
 	ID           string    `json:"id" bson:"_id"`
 	LicensePlate string    `json:"licensePlate" bson:"licensePlate"`
 	EntryTime    time.Time `json:"entryTime" bson:"entryTime"`
@@ -168,6 +187,7 @@ type Car struct {
 }
 
 type User struct {
+
 	ID       string `json:"id" bson:"_id"`
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
@@ -185,6 +205,7 @@ func init() {
 *Initializes MongoDB client and connects to a MongoDB server at localhost:27017.
 *Two collections (collection for cars and userCollection for users) are created.
 func main() {
+
 	app := gofr.New()
 	app.POST("/addEntry", addEntryHandler)
     	app.GET("/listCars", listCarsHandler)
@@ -290,11 +311,24 @@ func deleteEntryHandler(ctx *gofr.Context) (interface{}, error) {
 ***********// SCREENSHOTS OF RESPONSE AND POSTMAN  //**************
 This shows the car entry in localhost server on port 8000
 
+![Screenshot 2023-12-17 233049](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/02893cca-5f86-4bda-b5dc-d0c98ce626e0)
+
 This shows that Add cars Api sucessfully running and able to update the car according to the need
+![Screenshot 2023-12-17 233159](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/4b67a957-ee6e-4223-ae87-a636e39a8a76)
+
 
 This shows that Updation operation in the database
+![update](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/a36a393b-ac9e-41ff-9516-3128623d62b8)
+
 
 This shows that Delete operation in the database
+![delete](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/b5ee9199-97a4-4b6a-8e43-1425b7360d60)
+
 
 ***********// VIDEO  //**************
+
+
+https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/6a0a001c-7306-410e-827c-5860766b8d23
+
+
 
