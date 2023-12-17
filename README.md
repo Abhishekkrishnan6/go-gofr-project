@@ -76,13 +76,15 @@ Follow these steps to set up and run the project locally:
 ```bash
     go run main.go
  ```
- 
+
+
 4. Test the API using your preferred method (e.g., Postman, curl).
     
   i. List Cars
  ```bash
     Invoke-WebRequest -Uri "http://localhost:8000/listCars" -Method GET
 ```  
+
   ii. Add Car
 ```bash 
     Invoke-RestMethod -Uri "http://localhost:8000/addEntry" -Method POST -Body '{"licensePlate": "AVHekjkgtjIjhgI1234"}' -ContentType "application/json" 
@@ -95,6 +97,8 @@ Follow these steps to set up and run the project locally:
 ```bash
     Invoke-RestMethod -Uri "http://localhost:8000/deleteEntry" -Method POST -Body '{"id": "a4d94758-56ff-4340-ab22-858182ea6d96"}' -ContentType "application/json"
 ```
+
+
 ### API Endpoints
 #List Cars
    Endpoint: GET /listCars
@@ -105,6 +109,7 @@ Follow these steps to set up and run the project locally:
 }
    <br>
    <br>
+  
 #Add Car
    Endpoint: POST /addEntry 
    Description: Add a new car to the collection.
@@ -121,6 +126,7 @@ Follow these steps to set up and run the project locally:
     }
    }<br>
     <br>
+ 
 #Update Car Repair Status
    Endpoint: PUT /updateEntry
    Description: Set a car's status to "Under Repair."
@@ -131,12 +137,15 @@ Follow these steps to set up and run the project locally:
     }
    Response:json
    {
-    "data": {
+   
+   ```bash
+     "data": {
         "message": "Car entry updated successfully"
     }
  ```
    }<br>
     <br>
+   <br>
 #Remove Car
    Endpoint: PUT /deleteEntry
    Description: Remove a car from the collection.
@@ -316,7 +325,7 @@ This shows that Delete operation in the database
 ![delete](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/b5ee9199-97a4-4b6a-8e43-1425b7360d60)
 
 
-***********// VIDEO Description Of Project  //**************
+***********// VIDEO Description of Project //**************
 
 
 https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/6a0a001c-7306-410e-827c-5860766b8d23
