@@ -331,4 +331,11 @@ This shows that Delete operation in the database
 https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/6a0a001c-7306-410e-827c-5860766b8d23
 
 
+## Sequence Diagram
+![WhatsApp Image 2023-12-18 at 12 47 06 AM](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/ca6b6d93-1c82-495f-ad39-bc45c1878177)
+
+## Class Diagram
+
+
+
 
