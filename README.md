@@ -81,70 +81,70 @@ Follow these steps to set up and run the project locally:
 4. Test the API using your preferred method (e.g., Postman, curl).
     
   i. List Cars
-    ```bash
-      Invoke-WebRequest -Uri "http://localhost:8000/listCars" -Method GET
-    ```  
+ ```bash
+    Invoke-WebRequest -Uri "http://localhost:8000/listCars" -Method GET
+```  
 
   ii. Add Car
-   ```bash 
-     Invoke-RestMethod -Uri "http://localhost:8000/addEntry" -Method POST -Body '{"licensePlate": "AVHekjkgtjIjhgI1234"}' -ContentType "application/json" 
-   ```
+```bash 
+    Invoke-RestMethod -Uri "http://localhost:8000/addEntry" -Method POST -Body '{"licensePlate": "AVHekjkgtjIjhgI1234"}' -ContentType "application/json" 
+```
   iii. UPDATE CARS
 ```bash
-     Invoke-RestMethod -Uri "http://localhost:8080/updateEntry" -Method PUT -Body '{"id": "ea9d706d-59a3-4838-ba1f-caf6b398e788", "status": "COMPLETED"}' -ContentType "application/json" 
+    Invoke-RestMethod -Uri "http://localhost:8080/updateEntry" -Method PUT -Body '{"id": "ea9d706d-59a3-4838-ba1f-caf6b398e788", "status": "COMPLETED"}' -ContentType "application/json" 
 ```          
   iv. Delete Cars
 ```bash
-     Invoke-RestMethod -Uri "http://localhost:8000/deleteEntry" -Method POST -Body '{"id": "a4d94758-56ff-4340-ab22-858182ea6d96"}' -ContentType "application/json"
+    Invoke-RestMethod -Uri "http://localhost:8000/deleteEntry" -Method POST -Body '{"id": "a4d94758-56ff-4340-ab22-858182ea6d96"}' -ContentType "application/json"
 ```
 
 
-API Endpoints
-#List Cars<br>
-   Endpoint: GET /listCars<br>
-   Description: Retrieve the list of cars.<br>
-   Response:[{"data":[{"id":"9f3996d9-83e5-48da-ae43-f10e44edb51f","licensePlate":"2131qwasdf","entryTime":"2023-12-15T18:23:25.882Z","status":"In Garage"},{"id":"c762ee04-4c2a-489b-b96c-f982006c5855","licensePlate":"5tyfhg","entryTime":"2023-12-15T18:48:32.418Z","status":"In Garage"}]<br>
+### API Endpoints
+#List Cars
+   Endpoint: GET /listCars
+   Description: Retrieve the list of cars.
+   Response:[{"data":[{"id":"9f3996d9-83e5-48da-ae43-f10e44edb51f","licensePlate":"2131qwasdf","entryTime":"2023-12-15T18:23:25.882Z","status":"In Garage"},{"id":"c762ee04-4c2a-489b-b96c-f982006c5855","licensePlate":"5tyfhg","entryTime":"2023-12-15T18:48:32.418Z","status":"In Garage"}]
    <br>
 #Add Car
-   Endpoint: POST /addEntry <br>
-   Description: Add a new car to the collection.<br>
-   Request Body: json<br>
-   {"licensePlate": "AVHekjkgtjIjhgI1237TUYG4"}<br>
-   Response:json <br>
-   {<br>
-    "data": {<br>
-        "id": "9e5710a8-f008-4c02-9ea9-73f0edd2af82"<br>
+   Endpoint: POST /addEntry 
+   Description: Add a new car to the collection.
+   Request Body: json
+   {"licensePlate": "AVHekjkgtjIjhgI1237TUYG4"}
+   Response:json 
+   {
+    "data": {
+        "id": "9e5710a8-f008-4c02-9ea9-73f0edd2af82"
     }
    }<br>
-#Update Car Repair Status<br>
-   Endpoint: PUT /updateEntry<br>
-   Description: Set a car's status to "Under Repair."<br>
-   Request Body: json<br>
-   {<br>
-    "id": "ea9d706d-59a3-4838-ba1f-caf6b398e788", "status": "COMPLETED"<br>
-    }<br>
-   Response:json<br>
-   {<br>
-    "data": {<br>
-        "message": "Car entry updated successfully"<br>
-    }<br>
-   }<br>
-#Remove Car<br>
-   Endpoint: PUT /deleteEntry<br>
-   Description: Remove a car from the collection.<br>
-   Request Body: json<br>
-   {<br>
-    "id": "a4d94758-56ff-4340-ab22-858182ea6d96"<br>
-    }<br>
-   Response:json<br>
+#Update Car Repair Status
+   Endpoint: PUT /updateEntry
+   Description: Set a car's status to "Under Repair."
+   Request Body: json
    {
-    <br>
-    "data": {<br>
-        "message": "Car entry deleted successfully"<br>
+    "id": "ea9d706d-59a3-4838-ba1f-caf6b398e788", "status": "COMPLETED"
+    }
+   Response:json
+   {
+    "data": {
+        "message": "Car entry updated successfully"
+    }
+   }<br>
+#Remove Car
+   Endpoint: PUT /deleteEntry
+   Description: Remove a car from the collection.
+   Request Body: json
+   {
+    "id": "a4d94758-56ff-4340-ab22-858182ea6d96"
+    }
+   Response:json
+   {
+    
+    "data": {
+        "message": "Car entry deleted successfully"
     
 }
    }<br>
-**********// CODE EXPLAINATION //*************
+# CODE EXPLAINATION 
 package main<br>
 
 import (
@@ -289,13 +289,12 @@ func deleteEntryHandler(ctx *gofr.Context) (interface{}, error) {
 
 ***********// SCREENSHOTS OF RESPONSE AND POSTMAN  //**************
 This shows the car entry in localhost server on port 8000
-![Alt text](<Screenshot 2023-12-17 233159.jpg>)
+
 This shows that Add cars Api sucessfully running and able to update the car according to the need
-![Alt text](<Screenshot 2023-12-17 233159-1.jpg>)
+
 This shows that Updation operation in the database
-![Alt text](update.jpg)
+
 This shows that Delete operation in the database
-![Alt text](delete.jpg)
+
 ***********// VIDEO  //**************
 
- <video src="tut.mp4" controls title="Title"></video>
