@@ -334,7 +334,9 @@ https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/6a0a001c-73
 ## Sequence Diagram
 ![WhatsApp Image 2023-12-18 at 12 47 06 AM](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/ca6b6d93-1c82-495f-ad39-bc45c1878177)
 
-## Class Diagram
+## Unit Tests
+![image](https://github.com/Abhishekkrishnan6/go-gofr-project/assets/38767003/4a61aa23-5c5b-402a-b281-4957c132c047)
+
 
 
 
